@@ -1,0 +1,296 @@
+{
+  "62": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "74": {
+    "DÍAS CALENDARIO": 90,
+    "BAJO": 27,
+    "MEDIO": 63,
+    "ALTO": 90,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "100": {
+    "DÍAS CALENDARIO": 90,
+    "BAJO": 27,
+    "MEDIO": 63,
+    "ALTO": 90,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "102": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SE"
+  },
+  "56": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SE"
+  },
+  "57": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SE"
+  },
+  "58": {
+    "DÍAS CALENDARIO": 270,
+    "BAJO": 81,
+    "MEDIO": 189,
+    "ALTO": 270,
+    "DEPENDENCIA": "SE"
+  },
+  "88": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "GIC"
+  },
+  "5": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "7": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "31": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "32": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "10": {
+    "DÍAS CALENDARIO": 5,
+    "BAJO": 1,
+    "MEDIO": 3,
+    "ALTO": 5,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "64": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "97": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "21": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "23": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "25": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "50": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "28": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "38": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "9": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "22": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "49": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "71": {
+    "DÍAS CALENDARIO": 15,
+    "BAJO": 4,
+    "MEDIO": 10,
+    "ALTO": 15,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "41": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SE"
+  },
+  "45": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SE"
+  },
+  "95": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SE"
+  },
+  "42": {
+    "DÍAS CALENDARIO": 90,
+    "BAJO": 27,
+    "MEDIO": 63,
+    "ALTO": 90,
+    "DEPENDENCIA": "SE"
+  },
+  "63": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "GIC"
+  },
+  "89": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "GIC"
+  },
+  "34": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "GIC"
+  },
+  "72": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "GIC"
+  },
+  "19": {
+    "DÍAS CALENDARIO": 38,
+    "BAJO": 11,
+    "MEDIO": 26,
+    "ALTO": 38,
+    "DEPENDENCIA": "GIC"
+  },
+  "37": {
+    "DÍAS CALENDARIO": 38,
+    "BAJO": 11,
+    "MEDIO": 26,
+    "ALTO": 38,
+    "DEPENDENCIA": "GIC"
+  },
+  "103": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "GIC"
+  },
+  "94": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "GIC"
+  },
+  "67": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "GIC"
+  },
+  "44": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SE"
+  },
+  "84": {
+    "DÍAS CALENDARIO": 30,
+    "BAJO": 9,
+    "MEDIO": 21,
+    "ALTO": 30,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "87": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SIFJ"
+  },
+  "104": {
+    "DÍAS CALENDARIO": 60,
+    "BAJO": 18,
+    "MEDIO": 42,
+    "ALTO": 60,
+    "DEPENDENCIA": "SIFJ"
+  }
+}

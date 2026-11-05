@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Global Styles
+ * Base styles and theme CSS variables for Dashboard Entidad
+ * Supports smooth theme transitions between light and dark modes
+ * 
+ * **Validates: Requirements 9.4**
+ */
+
+/* 
+ * Light theme CSS variables (default)
+ */
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #1e3a8a;
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-border: #e2e8f0;
+
+  /*
+   * Chart colors (RGB triplets so they can be used with rgba()).
+   * Consumed by the chart components via rgba(var(--chart-*), alpha).
+   */
+  --chart-total: 59, 130, 246;
+  --chart-gic: 139, 92, 246;
+  --chart-se: 14, 165, 233;
+  --chart-sifj: 236, 72, 153;
+  --chart-riesgo-bajo: 34, 197, 94;
+  --chart-riesgo-medio: 251, 191, 36;
+  --chart-riesgo-alto: 239, 68, 68;
+  /* Dark text that stays readable over green, yellow and red segments */
+  --chart-segment-label: 15, 23, 42;
+}
+
+/*
+ * Dark theme CSS variables
+ * Primary color: Dark blue (#1e3a8a) as specified in requirements
+ */
+[data-theme='dark'] {
+  --color-primary: #1e3a8a;
+  --color-secondary: #3b82f6;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-border: #334155;
+}
+
+/* 
+ * Base reset styles 
+ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.5;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+/* 
+ * Smooth theme transition
+ * Applied to background and color properties for seamless theme switching
+ */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 
+ * Utility classes for theme colors 
+ */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-surface {
+  background-color: var(--color-surface);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.border-primary {
+  border-color: var(--color-border);
+}
+
+/*
+ * Recharts tooltip theme
+ * Overrides Recharts' internal classes so tooltips stay readable
+ * in both light and dark themes without repeating inline styles
+ * on every chart component.
+ */
+.recharts-default-tooltip {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 0.5rem !important;
+}
+
+.recharts-tooltip-item,
+.recharts-tooltip-label {
+  color: var(--color-text) !important;
+}
+
+/* 
+ * Accessibility improvements 
+ */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 
+ * Print styles 
+ */
+@media print {
+  * {
+    transition: none !important;
+  }
+}
