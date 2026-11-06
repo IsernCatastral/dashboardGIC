@@ -15,7 +15,7 @@ interface MetricCardProps {
 }
 
 export const MetricCard = ({ metric, isClickable = false, isSelected = false, onClick }: MetricCardProps) => {
-  const baseClasses = "bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-200";
+  const baseClasses = "bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-200";
   const clickableClasses = isClickable 
     ? "hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-500 cursor-pointer transform hover:scale-105" 
     : "hover:shadow-lg";

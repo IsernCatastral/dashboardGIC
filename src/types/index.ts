@@ -27,12 +27,6 @@ export type {
   ChartType,
 } from './metric.types';
 
-// Theme types
-export type {
-  Theme,
-  ThemeColors,
-} from './theme.types';
-
 // Navigation types
 export type {
   Screen,

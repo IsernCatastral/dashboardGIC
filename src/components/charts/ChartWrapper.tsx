@@ -25,6 +25,7 @@ interface ChartWrapperProps {
   showAllXLabels?: boolean;
   horizontal?: boolean;
   axisWidth?: number;
+  rotateXLabels?: boolean;
   /** Fixed Y ticks for bar and area charts; charts given the same ticks share the same gridlines */
   yTicks?: number[];
   /** Plot height in px for bar and area charts, so charts side by side can match */
@@ -45,6 +46,7 @@ const ChartWrapperComponent = ({
   showAllXLabels,
   horizontal,
   axisWidth,
+  rotateXLabels,
   yTicks,
   plotHeight,
   compact = false,
@@ -69,6 +71,7 @@ const ChartWrapperComponent = ({
             stacked={chart.stacked}
             horizontal={horizontal}
             axisWidth={axisWidth}
+            rotateXLabels={rotateXLabels}
             height={plotHeight}
             yTicks={yTicks}
           />
@@ -96,9 +99,9 @@ const ChartWrapperComponent = ({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-900 ${compact ? 'p-4' : 'p-6'} rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col`}
+      className={`bg-white dark:bg-slate-900 ${compact ? 'p-3 sm:p-4' : 'p-4 sm:p-6'} rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col`}
     >
-      <div className={`flex justify-between items-center gap-2 ${compact ? 'mb-2' : 'mb-4'}`}>
+      <div className={`flex flex-wrap justify-between items-center gap-2 ${compact ? 'mb-2' : 'mb-4'}`}>
         <h3 className="text-lg font-semibold">{dynamicTitle || chart.title}</h3>
         {headerAction}
       </div>

@@ -31,7 +31,7 @@ export const KPICard = ({ kpi }: KPICardProps) => {
 
   return (
     <div
-      className={`p-6 rounded-lg border-2 transition-all hover:shadow-lg ${statusColors[status]}`}
+      className={`p-4 sm:p-6 rounded-lg border-2 transition-all hover:shadow-lg ${statusColors[status]}`}
     >
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-secondary">{kpi.label}</h3>

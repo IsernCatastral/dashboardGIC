@@ -15,7 +15,7 @@ beforeAll(() => {
   // to ensure adequate randomization coverage
 });
 
-// Mock window.matchMedia for theme-related tests
+// Mock window.matchMedia (used by useBreakpoint)
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: (query: string) => ({
@@ -30,7 +30,7 @@ Object.defineProperty(window, 'matchMedia', {
   }),
 });
 
-// Mock localStorage for theme persistence tests
+// Mock localStorage
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
 

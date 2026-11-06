@@ -4,26 +4,20 @@
 
 /**
  * Global Styles
- * Base styles and theme CSS variables for Dashboard Entidad
- * Supports smooth theme transitions between light and dark modes
- * 
- * **Validates: Requirements 9.4**
+ * Base styles and CSS variables for Dashboard Entidad (dark theme only)
  */
 
-/* 
- * Light theme CSS variables (default)
- */
 :root {
-  --color-primary: #3b82f6;
-  --color-secondary: #1e3a8a;
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-success: #059669;
-  --color-warning: #d97706;
-  --color-error: #dc2626;
-  --color-border: #e2e8f0;
+  --color-primary: #1e3a8a;
+  --color-secondary: #3b82f6;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-border: #334155;
 
   /*
    * Chart colors (RGB triplets so they can be used with rgba()).
@@ -38,23 +32,6 @@
   --chart-riesgo-alto: 239, 68, 68;
   /* Dark text that stays readable over green, yellow and red segments */
   --chart-segment-label: 15, 23, 42;
-}
-
-/*
- * Dark theme CSS variables
- * Primary color: Dark blue (#1e3a8a) as specified in requirements
- */
-[data-theme='dark'] {
-  --color-primary: #1e3a8a;
-  --color-secondary: #3b82f6;
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #cbd5e1;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-border: #334155;
 }
 
 /* 

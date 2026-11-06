@@ -43,10 +43,10 @@ export const MapVisualization = ({
   ).length;
 
   return (
-    <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+    <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700 h-full flex flex-col">
       <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
         <h3 className="text-lg font-semibold">Mapa de ubicaciones</h3>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto [&>select]:flex-1 sm:[&>select]:flex-none">
           <select
             value={dependencyFilter}
             onChange={(e) => onDependencyChange(e.target.value)}
@@ -73,7 +73,7 @@ export const MapVisualization = ({
       </div>
 
       {/* ArcGIS Online Web Map */}
-      <div className="relative flex-1 min-h-[460px] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+      <div className="relative flex-1 min-h-[320px] md:min-h-[460px] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
         <ArcGISWebMap
           records={records}
           riskFilter={riskFilter}

@@ -12,6 +12,7 @@ import { BarChart } from '../components/charts/BarChart';
 import { PieChart } from '../components/charts/PieChart';
 import { formatNumber } from '../utils/formatters';
 import { getSharedYTicks } from '../utils/chartScale';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 import { colorFromPalette, PROCEDURE_TYPE_COLORS, STATE_COLORS } from '../utils/chartColors';
 
 // Risk status colors, consistent with --chart-riesgo-* variables in globals.css
@@ -25,7 +26,7 @@ const RISK_STATUS_COLORS: Record<string, string> = {
 // inside the table's container. It is set on each cell (not on <tr>/<thead>, which browsers don't
 // handle reliably), so every cell needs its own opaque background and bottom border.
 const TABLE_HEADER_CELL =
-  'sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-700 text-left py-3 px-4 font-medium text-sm';
+  'sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-700 text-left py-2 px-2 sm:py-3 sm:px-4 font-medium text-xs sm:text-sm';
 
 // Records on this screen are scoped to GIC, matched against the original
 // source `dependenciaOrigen` field (short code), consistent with how the
@@ -34,6 +35,7 @@ const GIC_SOURCE_DEPENDENCY = 'GIC';
 
 export const GicScreen = () => {
   const { dashboardData, isLoading, error, refetch } = useData();
+  const breakpoint = useBreakpoint();
   const [radicadoFilter, setRadicadoFilter] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('Todos');
   const [assignedUserFilter, setAssignedUserFilter] = useState<string>('Todos');
@@ -366,40 +368,45 @@ export const GicScreen = () => {
   );
   const sharedYTicks = getSharedYTicks([groupTotals]);
 
+  const isMobile = breakpoint === 'mobile';
+  const pieHeight = isMobile ? 280 : 360;
+  const pieRadius = isMobile ? 95 : 130;
+  const professionalAxisWidth = isMobile ? 150 : undefined;
+
   return (
     <div className="space-y-6 min-h-full bg-white dark:bg-slate-900">
       {/* Summary Panel */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 sm:p-6 rounded-lg border border-blue-200 dark:border-blue-800">
           <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Total Solicitudes</p>
-          <p className="text-3xl font-bold mt-2">{formatNumber(totalSolicitudes)}</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-2">{formatNumber(totalSolicitudes)}</p>
         </div>
-        <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+        <div className="bg-green-50 dark:bg-green-900/20 p-4 sm:p-6 rounded-lg border border-green-200 dark:border-green-800">
           <p className="text-sm text-green-600 dark:text-green-400 font-medium">Total Riesgo Bajo</p>
-          <p className="text-3xl font-bold mt-2">{formatNumber(totalRiesgoBajo)}</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-2">{formatNumber(totalRiesgoBajo)}</p>
         </div>
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg border border-yellow-200 dark:border-yellow-800">
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 sm:p-6 rounded-lg border border-yellow-200 dark:border-yellow-800">
           <p className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">Total Riesgo Medio</p>
-          <p className="text-3xl font-bold mt-2">{formatNumber(totalRiesgoMedio)}</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-2">{formatNumber(totalRiesgoMedio)}</p>
         </div>
-        <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg border border-red-200 dark:border-red-800">
+        <div className="bg-red-50 dark:bg-red-900/20 p-4 sm:p-6 rounded-lg border border-red-200 dark:border-red-800">
           <p className="text-sm text-red-600 dark:text-red-400 font-medium">Total Riesgo Alto</p>
-          <p className="text-3xl font-bold mt-2">{formatNumber(totalRiesgoAlto)}</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-2">{formatNumber(totalRiesgoAlto)}</p>
         </div>
       </div>
 
       {/* Charts: risk vs group and record count vs group. They only react to the group filter above and to the bars of the second chart */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold mb-4">Riesgo por Grupo</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <div className="flex items-center justify-between gap-2 mb-2 min-h-[2.25rem]">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2 min-h-[2.25rem]">
               <h4 className="text-sm font-medium text-secondary">Cantidad de trámites por Riesgo por Grupo</h4>
               <select
                 value={chartGroupFilter}
                 onChange={(e) => handleGroupFilterChange(e.target.value)}
                 aria-label="Filtrar por grupo"
-                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100"
+                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-auto max-w-full"
               >
                 <option value="Todos">Todos los grupos</option>
                 {chartGroupOptions.map((group) => (
@@ -416,7 +423,7 @@ export const GicScreen = () => {
             />
           </div>
           <div>
-            <div className="flex items-center justify-between gap-2 mb-2 min-h-[2.25rem]">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2 min-h-[2.25rem]">
               <h4 className="text-sm font-medium text-secondary">
                 {activeProcedureType === null
                   ? 'Cantidad de Trámites por Tipo de Trámite vs Grupo'
@@ -428,7 +435,7 @@ export const GicScreen = () => {
                   handleProcedureTypeChange(e.target.value === 'Todos' ? null : e.target.value)
                 }
                 aria-label="Filtrar por tipo de trámite"
-                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 max-w-xs"
+                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-auto max-w-full sm:max-w-xs"
               >
                 <option value="Todos">Todos los trámites</option>
                 {procedureTypesInPie.map((type) => (
@@ -440,8 +447,8 @@ export const GicScreen = () => {
               <>
                 <PieChart
                   data={groupPieChart.data}
-                  height={360}
-                  outerRadius={130}
+                  height={pieHeight}
+                  outerRadius={pieRadius}
                   showSliceNames={false}
                   showLegend={false}
                   onSliceClick={handleProcedureTypeChange}
@@ -485,14 +492,14 @@ export const GicScreen = () => {
 
       {/* States by risk and trámites per Profesional Encargado. The second card is a bit wider (5:6) so the professionals' names fit */}
       <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-6">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between gap-2 mb-4">
+        <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
             <h3 className="text-lg font-semibold">Cantidad de trámites por Estado por Riesgo</h3>
             <select
               value={chartState ?? 'Todos'}
               onChange={(e) => setSelectedState(e.target.value === 'Todos' ? null : e.target.value)}
               aria-label="Filtrar por estado"
-              className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100"
+              className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-auto max-w-full"
             >
               <option value="Todos">Todos los estados</option>
               {workflowStates.map((state) => (
@@ -502,14 +509,14 @@ export const GicScreen = () => {
           </div>
           <PieChart
             data={statePieChart.data}
-            height={360}
-            outerRadius={130}
+            height={pieHeight}
+            outerRadius={pieRadius}
             showSliceNames={false}
             showLegend={false}
             selectedName={chartState ?? undefined}
             onSliceClick={handleStateClick}
           />
-          <div className="grid grid-cols-3 gap-x-4 gap-y-1.5 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-1.5 mt-3">
             {stateLegend.map(({ state, count, percent, color }) => (
               <button
                 key={state}
@@ -529,10 +536,10 @@ export const GicScreen = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="flex justify-between items-center mb-4">
+        <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
             <h3 className="text-lg font-semibold">Cantidad de Trámites por Profesional Encargado</h3>
-            <div className="relative flex items-center gap-2" ref={userPieDropdownRef}>
+            <div className="relative flex items-center gap-2 w-full sm:w-auto" ref={userPieDropdownRef}>
               <input
                 type="text"
                 value={userPieInputText ?? (assignedUserFilter === 'Todos' ? '' : assignedUserFilter)}
@@ -550,7 +557,7 @@ export const GicScreen = () => {
                 }}
                 onFocus={() => setIsUserPieDropdownOpen(true)}
                 placeholder="Todos los profesionales"
-                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-64"
+                className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-64"
               />
               {assignedUserFilter !== 'Todos' && (
                 <button
@@ -566,7 +573,7 @@ export const GicScreen = () => {
                 </button>
               )}
               {isUserPieDropdownOpen && (
-                <div className="absolute top-full right-0 mt-1 w-64 max-h-56 overflow-y-auto rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 shadow-lg z-10">
+                <div className="absolute top-full right-0 mt-1 w-full sm:w-64 max-h-56 overflow-y-auto rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 shadow-lg z-10">
                   <button
                     type="button"
                     onClick={() => {
@@ -606,12 +613,14 @@ export const GicScreen = () => {
             maxVisibleBars={10}
             onLabelClick={handleProfessionalLabelClick}
             selectedLabel={activeTableProfessional}
+            axisWidth={professionalAxisWidth}
+            alignLabelsRight={false}
           />
         </div>
       </div>
 
       {/* Records Table */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
           <div>
             <h3 className="text-lg font-semibold">Registros GIC</h3>
@@ -620,14 +629,14 @@ export const GicScreen = () => {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className="flex flex-wrap items-center gap-3 mb-4 [&>select]:w-full sm:[&>select]:w-auto [&>div]:w-full sm:[&>div]:w-auto [&>div>input]:flex-1 sm:[&>div>input]:flex-none">
           <input
             type="text"
             value={radicadoFilter}
             onChange={(e) => setRadicadoFilter(e.target.value)}
             placeholder="Buscar radicado"
             aria-label="Buscar por radicado"
-            className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-44"
+            className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-44"
           />
           <select
             value={statusFilter}
@@ -683,8 +692,8 @@ export const GicScreen = () => {
             />
           </div>
         </div>
-        <div className="overflow-x-auto overflow-y-auto max-h-96">
-          <table className="w-full">
+        <div className="overflow-x-auto overflow-y-auto max-h-80 sm:max-h-96">
+          <table className="w-full [&_td]:px-2 [&_td]:py-2 [&_td]:text-xs sm:[&_td]:px-4 sm:[&_td]:py-3 sm:[&_td]:text-sm">
             <thead>
               <tr>
                 <th className={TABLE_HEADER_CELL}>Radicado</th>

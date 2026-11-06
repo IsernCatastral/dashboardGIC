@@ -12,20 +12,23 @@ import { KPIList } from '../components/kpis/KPIList';
 import { ChartWrapper } from '../components/charts/ChartWrapper';
 import { MapVisualization } from '../components/map/MapVisualization';
 import { getSharedYTicks } from '../utils/chartScale';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 import { getEntriesExitsChart, type EntriesExitsDependency } from '../services/dashboardData.service';
 import { formatNumber } from '../utils/formatters';
 
 // Plot height shared by the two time-series charts so their gridlines line up. The cards
 // are compact (less padding), so the card grows by about this value minus what the padding gave back.
 const TIME_SERIES_PLOT_HEIGHT = 480;
+const TIME_SERIES_PLOT_HEIGHT_MOBILE = 360;
 const TIME_SERIES_HORIZONTAL_PLOT_HEIGHT = 560;
+const TIME_SERIES_HORIZONTAL_PLOT_HEIGHT_MOBILE = 500;
 const TIME_SERIES_AXIS_WIDTH = 72;
 
 // Header cell of the records table. `sticky top-0` keeps the header visible while the rows scroll
 // inside the table's container. It is set on each cell (not on <tr>/<thead>, which browsers don't
 // handle reliably), so every cell needs its own opaque background and bottom border.
 const TABLE_HEADER_CELL =
-  'sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-700 text-left py-3 px-4 font-medium text-sm';
+  'sticky top-0 z-10 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-700 text-left py-2 px-2 sm:py-3 sm:px-4 font-medium text-xs sm:text-sm';
 
 // The map's dependency filter and the main metric cards share one selection: each card id
 // matches one dependency of the map ("total" is "Todas")
@@ -48,6 +51,7 @@ const GIC_SOURCE_DEPENDENCY = 'GIC';
 
 export const DashboardScreen = () => {
   const { dashboardData, isLoading, error, refetch } = useData();
+  const isMobile = useBreakpoint() === 'mobile';
   const [selectedDatasetId, setSelectedDatasetId] = useState<string>('total'); // Default to total
   const [radicadoFilter, setRadicadoFilter] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('Todos');
@@ -203,7 +207,7 @@ export const DashboardScreen = () => {
   return (
     <div className="space-y-6 min-h-full bg-white dark:bg-slate-900">
       {/* Welcome Message */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-lg">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 sm:p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-2">
           Bienvenido!
         </h2>
@@ -211,7 +215,7 @@ export const DashboardScreen = () => {
 
       {/* Metrics Section */}
       <div>
-        <h3 className="text-2xl font-semibold mb-4">Métricas Principales</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold mb-4">Métricas Principales</h3>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
           Haz clic en cualquier métrica para ver su desglose de riesgo
         </p>
@@ -230,13 +234,13 @@ export const DashboardScreen = () => {
 
       {/* KPIs Section */}
       <div>
-        <h3 className="text-2xl font-semibold mb-4">Indicadores de Oportunidad</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold mb-4">Indicadores de Oportunidad</h3>
         <KPIList kpis={dynamicKPIs} />
       </div>
 
       {/* Charts and Map Section */}
       <div>
-        <h3 className="text-2xl font-semibold mb-4">Análisis de Datos</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold mb-4">Análisis de Datos</h3>
 
         {/* Pie chart + Map - side by side row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -249,8 +253,8 @@ export const DashboardScreen = () => {
                   <ChartWrapper
                     key={chart.id}
                     chart={optimizedPieChart}
-                    height={460}
-                    outerRadius={150}
+                    height={isMobile ? 320 : 460}
+                    outerRadius={isMobile ? 105 : 150}
                   />
                 );
               }
@@ -317,9 +321,14 @@ export const DashboardScreen = () => {
                 showAllXLabels
                 horizontal={isDependencyChart}
                 axisWidth={isDependencyChart ? TIME_SERIES_AXIS_WIDTH : undefined}
+                rotateXLabels={isMobile && !isDependencyChart}
                 compact
                 yTicks={timeSeriesYTicks}
-                plotHeight={isDependencyChart ? TIME_SERIES_HORIZONTAL_PLOT_HEIGHT : TIME_SERIES_PLOT_HEIGHT}
+                plotHeight={
+                  isDependencyChart
+                    ? isMobile ? TIME_SERIES_HORIZONTAL_PLOT_HEIGHT_MOBILE : TIME_SERIES_HORIZONTAL_PLOT_HEIGHT
+                    : isMobile ? TIME_SERIES_PLOT_HEIGHT_MOBILE : TIME_SERIES_PLOT_HEIGHT
+                }
                 headerAction={
                   isDependencyChart ? (
                     <select
@@ -356,7 +365,7 @@ export const DashboardScreen = () => {
       </div>
 
       {/* Records Table */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
         <button
           type="button"
           onClick={() => setIsRecordsOpen((open) => !open)}
@@ -378,14 +387,14 @@ export const DashboardScreen = () => {
         {isRecordsOpen && (
         <>
         {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className="flex flex-wrap items-center gap-3 mb-4 [&>select]:w-full sm:[&>select]:w-auto [&>div]:w-full sm:[&>div]:w-auto [&>div>input]:flex-1 sm:[&>div>input]:flex-none">
           <input
             type="text"
             value={radicadoFilter}
             onChange={(e) => setRadicadoFilter(e.target.value)}
             placeholder="Buscar radicado"
             aria-label="Buscar por radicado"
-            className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-44"
+            className="px-3 py-2 text-sm rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 w-full sm:w-44"
           />
           <select
             value={statusFilter}
@@ -440,8 +449,8 @@ export const DashboardScreen = () => {
             />
           </div>
         </div>
-        <div className="overflow-x-auto overflow-y-auto max-h-96">
-          <table className="w-full">
+        <div className="overflow-x-auto overflow-y-auto max-h-80 sm:max-h-96">
+          <table className="w-full [&_td]:px-2 [&_td]:py-2 [&_td]:text-xs sm:[&_td]:px-4 sm:[&_td]:py-3 sm:[&_td]:text-sm">
             <thead>
               <tr>
                 <th className={TABLE_HEADER_CELL}>Radicado</th>

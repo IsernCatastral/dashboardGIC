@@ -48,6 +48,8 @@ interface BarChartProps {
   height?: number;
   xAxisHeight?: number;
   axisWidth?: number;
+  alignLabelsRight?: boolean;
+  rotateXLabels?: boolean;
   showValues?: boolean;
   selectedIndex?: number;
   /**
@@ -96,6 +98,7 @@ interface CategoryTickProps {
   /** Category currently selected through its label; drawn highlighted */
   selectedLabel?: string;
   axisWidth?: number;
+  alignLabelsRight?: boolean;
 }
 
 /**
@@ -109,11 +112,13 @@ const HorizontalCategoryTick = ({
   onLabelClick,
   selectedLabel,
   axisWidth,
+  alignLabelsRight,
 }: CategoryTickProps) => {
   const width = axisWidth ?? HORIZONTAL_AXIS_WIDTH;
-  const alignRight = axisWidth !== undefined;
+  const alignRight = alignLabelsRight ?? axisWidth !== undefined;
   const name = payload?.value ?? '';
-  const maxChars = alignRight ? Math.floor((width - 12) / 6) : HORIZONTAL_LABEL_MAX_CHARS;
+  const maxChars =
+    axisWidth !== undefined ? Math.floor((width - 12) / (alignRight ? 6 : 5.5)) : HORIZONTAL_LABEL_MAX_CHARS;
   const lines = wrapLabel(name, maxChars, HORIZONTAL_LABEL_MAX_LINES);
   const lineHeight = 12;
   const left = x - width + 4;
@@ -198,6 +203,8 @@ export const BarChart = ({
   height,
   xAxisHeight,
   axisWidth,
+  alignLabelsRight,
+  rotateXLabels,
   showValues = false,
   selectedIndex,
   yTicks,
@@ -294,6 +301,7 @@ export const BarChart = ({
                   onLabelClick={onLabelClick}
                   selectedLabel={selectedLabel}
                   axisWidth={axisWidth}
+                  alignLabelsRight={alignLabelsRight}
                 />
               }
             />
@@ -305,9 +313,9 @@ export const BarChart = ({
               className="text-sm text-gray-600 dark:text-gray-400"
               interval={showAllXLabels ? 0 : 'preserveEnd'}
               tick={showAllXLabels ? { fontSize: 11 } : undefined}
-              angle={horizontalLabels ? 0 : -30}
-              textAnchor={horizontalLabels ? 'middle' : 'end'}
-              height={xAxisHeight ?? (horizontalLabels ? 30 : 50)}
+              angle={rotateXLabels ? -90 : horizontalLabels ? 0 : -30}
+              textAnchor={rotateXLabels ? 'end' : horizontalLabels ? 'middle' : 'end'}
+              height={xAxisHeight ?? (rotateXLabels ? 56 : horizontalLabels ? 30 : 50)}
             />
             <YAxis
               className="text-sm text-gray-600 dark:text-gray-400"

@@ -3,7 +3,6 @@
  * Main application entry with provider hierarchy and layout
  */
 
-import { ThemeProvider } from './contexts/ThemeContext';
 import { NavigationProvider } from './contexts/NavigationContext';
 import { DataProvider } from './contexts/DataContext';
 import { MainLayout } from './components/layout/MainLayout';
@@ -38,13 +37,11 @@ const AppContent = () => {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider>
-        <NavigationProvider>
-          <DataProvider>
-            <AppContent />
-          </DataProvider>
-        </NavigationProvider>
-      </ThemeProvider>
+      <NavigationProvider>
+        <DataProvider>
+          <AppContent />
+        </DataProvider>
+      </NavigationProvider>
     </ErrorBoundary>
   );
 }
